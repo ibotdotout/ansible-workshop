@@ -19,6 +19,8 @@ inventories
 
 handlers
 
+templates - using [jinna2](http://jinja.pocoo.org/docs/dev/)
+
 # Ansible Commnad
 
 ```sh

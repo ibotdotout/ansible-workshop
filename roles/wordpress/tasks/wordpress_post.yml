@@ -11,3 +11,8 @@
     state: present
     login_user: root
     login_password: "{{ wordpress_mysql_root_pass }}"
+
+- name: Copy wp-config.php template
+  template: 
+      src: wp-config.php.j2
+      dest: "{{ wordpress_root_path }}/wp-config.php"
