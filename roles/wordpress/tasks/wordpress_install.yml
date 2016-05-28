@@ -5,6 +5,3 @@
     copy: false # requrie
   when:
       not check_wordpress.stat.exists
-  become: true
-
-

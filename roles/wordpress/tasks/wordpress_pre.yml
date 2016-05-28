@@ -1,16 +1,24 @@
+- name: Set MySQL root password before installing
+  debconf:
+    name: mysql-server
+    question: "{{ item }}"
+    value: "{{ wordpress_mysql_root_pass | quote }}"
+    vtype: password
+  with_items:
+    - mysql-server/root_password
+    - mysql-server/root_password_again
+
 - name: Install LAMP
   apt:
     name: "{{ item }}"
     state: present
   with_items:
       - "{{ wordpress_packages }}"
-  become: true
 
 - name: Delete "{{ wordpress_document_root }}" index.html
   file:
     path: "{{ wordpress_document_root_index }}"
     state: absent
-  become: true
 
 - name: Check if wordpress is installed
   stat:
@@ -18,4 +26,3 @@
   register: check_wordpress
 
 - debug: var=check_wordpress
-

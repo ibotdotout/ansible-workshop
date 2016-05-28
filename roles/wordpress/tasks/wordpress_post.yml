@@ -3,5 +3,11 @@
       dest: "{{ wordpress_apache_default_conf }}"
       regexp: ^\W*DocumentRoot
       line: "        DocumentRoot {{ wordpress_root_path}}"
-  become: true
   notify: Restarst Apache # call handlers
+
+- name: Create wordpress database
+  mysql_db:
+    name: "{{ wordpress_database_name }}"
+    state: present
+    login_user: root
+    login_password: "{{ wordpress_mysql_root_pass }}"
