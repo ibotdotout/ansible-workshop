@@ -1,0 +1,16 @@
+- name: Set timestamp 
+  shell: 'date +%Y%m%d%H%M%S.%5N'
+  register: current_run_timestamp
+
+- name: wordpress backup db
+  mysql_db:
+      name: "{{ wordpress_database_name }}"
+      state: dump
+      login_user: "{{ wordpress_mysql_root_user }}"
+      login_password: "{{ wordpress_mysql_root_pass }}"
+      target: /tmp/{{ inventory_hostname }}-{{current_run_timestamp.stdout}}.sql
+
+- name: fetch backup to local
+  fetch: 
+    src: /tmp/{{ inventory_hostname }}-{{current_run_timestamp.stdout}}.sql
+    dest: /tmp/{{ inventory_hostname }}-{{current_run_timestamp.stdout}}.sql
