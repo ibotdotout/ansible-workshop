@@ -34,6 +34,7 @@ sudo apt-get install openssh-server
 ```
 
 ### Ansible Documents
+- [Best Practices](http://docs.ansible.com/ansible/playbooks_best_practices.html)
 - [Playbooks Variables](http://docs.ansible.com/ansible/playbooks_variables.html)
 - [List of all modules](http://docs.ansible.com/ansible/list_of_all_modules.html)
 - [Galaxy Ansible](https://galaxy.ansible.com/)
