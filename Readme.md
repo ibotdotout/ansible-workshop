@@ -88,4 +88,6 @@ $ ansible-playbook -i inventories/wordpress --ask-pass wordpress.yml
 $ ansible-playbook -i inventories/wordpress  --ask-sudo-pass wordpress.yml
 $ ansible-playbook  -i inventories/wordpress wordpress.yml
 $ ansible-playbook -v -i inventories/wordpress wordpress.yml
+
+$ ansible-galaxy -p . install winggundamth.host_preparation
 ```

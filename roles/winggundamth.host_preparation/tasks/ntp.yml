@@ -1,0 +1,18 @@
+---
+- block: # Install NTP and configure it
+  - name: Install ntp packages
+    apt:
+       pkg: "{{ item }}"
+       state: latest
+    with_items:
+      - ntp
+
+  - name: Configure NTP
+    lineinfile:
+      dest: /etc/ntp.conf
+      state: present
+      regexp: '^server '
+      line: 'server {{ host_preparation_ntp_server }}'
+
+  tags:
+    - host-preparation-configure-ntp
