@@ -1,0 +1,21 @@
+- name: Install LAMP
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - "{{ wordpress_packages }}"
+  become: true
+
+- name: Delete "{{ wordpress_document_root }}" index.html
+  file:
+    path: "{{ wordpress_document_root_index }}"
+    state: absent
+  become: true
+
+- name: Check if wordpress is installed
+  stat:
+    path: "{{ wordpress_root_path }}"
+  register: check_wordpress
+
+- debug: var=check_wordpress
+

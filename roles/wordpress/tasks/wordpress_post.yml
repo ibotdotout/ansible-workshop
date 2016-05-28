@@ -1,0 +1,7 @@
+- name: Change root document on Apache
+  lineinfile:
+      dest: "{{ wordpress_apache_default_conf }}"
+      regexp: ^\W*DocumentRoot
+      line: "        DocumentRoot {{ wordpress_root_path}}"
+  become: true
+  notify: Restarst Apache # call handlers
