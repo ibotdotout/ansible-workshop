@@ -1,0 +1,10 @@
+wordpress_document_root: /var/www/html
+wordpress_document_root_index: "{{ wordpress_document_root }}/index.html"
+wordpress_root_path: "{{ wordpress_document_root}}/wordpress"
+wordpress_url_lastest_gz: https://wordpress.org/latest.tar.gz
+wordpress_apache_default_conf: /etc/apache2/sites-available/000-default.conf
+wordpress_packages: 
+    - apache2
+    - mysql-server
+    - php5
+    - php5-mysql

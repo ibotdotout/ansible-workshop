@@ -3,43 +3,40 @@
   shell: echo "Hello World"
 
 - name: Install LAMP
-  apt: 
+  apt:
     name: "{{ item }}"
     state: present
   with_items:
-    - apache2  
-    - mysql-server
-    - php5
-    - php5-mysql
+      - "{{ wordpress_packages }}"
   become: true
 
-- name: Delete /var/www/html/index.html
+- name: Delete "{{ wordpress_document_root }}" index.html
   file:
-    path: /var/www/html/index.html
+    path: "{{ wordpress_document_root_index }}"
     state: absent
   become: true
 
 - name: Check if wordpress is installed
-  stat: 
-    path: /var/www/html/wordpress
+  stat:
+    path: "{{ wordpress_root_path }}"
   register: check_wordpress
 
 - debug: var=check_wordpress
 
 - name: Download wordpress and extract file
-  unarchive: 
-    src: https://wordpress.org/latest.tar.gz
-    dest: /var/www/html
+  unarchive:
+    src: "{{ wordpress_url_lastest_gz }}"
+    dest: "{{ wordpress_document_root }}"
     copy: false # requrie
-  when: 
+  when:
       not check_wordpress.stat.exists
   become: true
 
 
 - name: Change root document on Apache
   lineinfile:
-      dest: /etc/apache2/sites-available/000-default.conf
+      dest: "{{ wordpress_apache_default_conf }}"
       regexp: ^\W*DocumentRoot
-      line: '        DocumentRoot /var/www/html/wordpress'
+      line: "        DocumentRoot {{ wordpress_root_path}}"
   become: true
   notify: Restarst Apache # call handlers
