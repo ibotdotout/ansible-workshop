@@ -1,0 +1,2 @@
+[wordpress]
+wordpress-01 ansible_host=127.0.0.1 ansible_port=2222 ansible_user=ubuntu ansible_password=ansibleclass ansible_become_pass=ansibleclass
